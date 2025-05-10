@@ -99,5 +99,135 @@ export HF_HOME=/opt/local/data/
 # ./Qwen_eval.sh --hoststr "$hoststr" --model_name_or_path /opt/nas/p/zhubin/saved_checkpoint/0222_Qwen2.5-14B-Instruct_neft_accdb_markdown_ep3_lr2e5_bs1/checkpoint-2142 \
 # 	--eval_dataset callsum_v6_test_markdown --finetuning_type full
 
-./Qwen_eval.sh --hoststr "$hoststr" --model_name_or_path /opt/nas/p/zhubin/saved_checkpoint/0222_Qwen2.5-14B-Instruct_neft_accdb_markdown_ep3_lr2e5_bs1/checkpoint-1429 \
-	--eval_dataset diting_v2_markdown --output_name "business_test_v2" --finetuning_type full
+# ./Qwen_eval.sh --hoststr "$hoststr" --model_name_or_path /opt/nas/p/zhubin/saved_checkpoint/0327_Qwen2.5-14B-Instruct_neft_accdb_markdown_wd_ep3_lr7e6_bs1/checkpoint-711 \
+# 	--eval_dataset diting_v7.2_markdown --output_name "business_test_v2" --finetuning_type full
+
+# ./Qwen_eval.sh --hoststr "$hoststr" --model_name_or_path /opt/nas/p/zhubin/saved_checkpoint/0327_Qwen2.5-14B-Instruct_neft_accdb_markdown_wd_ep3_lr7e6_bs1/checkpoint-711 \
+# 	--eval_dataset callsum_v7_test_markdown --output_name "callsum_v7_test_markdown" --finetuning_type full
+# ./Qwen_eval.sh --hoststr "$hoststr" --model_name_or_path /opt/nas/p/zhubin/saved_checkpoint/0327_Qwen2.5-14B-Instruct_neft_accdb_markdown_wd_ep3_lr7e6_bs1/checkpoint-1422 \
+# 	--eval_dataset diting_v7.2_markdown --output_name "business_test_v2" --finetuning_type full
+
+# ./Qwen_eval.sh --hoststr "$hoststr" --model_name_or_path /opt/nas/p/zhubin/saved_checkpoint/0327_Qwen2.5-14B-Instruct_neft_accdb_markdown_wd_ep3_lr7e6_bs1/checkpoint-1422 \
+# 	--eval_dataset callsum_v7_test_markdown --output_name "callsum_v7_test_markdown" --finetuning_type full
+
+# ./Qwen_eval.sh --hoststr "$hoststr" --model_name_or_path /opt/nas/p/zhubin/saved_checkpoint/0327_Qwen2.5-14B-Instruct_neft_accdb_markdown_wd_ep3_lr7e6_bs1/checkpoint-2130 \
+# 	--eval_dataset diting_v7.2_markdown --output_name "business_test_v2" --finetuning_type full
+
+# ./Qwen_eval.sh --hoststr "$hoststr" --model_name_or_path /opt/nas/p/zhubin/saved_checkpoint/0327_Qwen2.5-14B-Instruct_neft_accdb_markdown_wd_ep3_lr7e6_bs1/checkpoint-2130 \
+# 	--eval_dataset callsum_v7_test_markdown --output_name "callsum_v7_test_markdown" --finetuning_type full
+
+# ./Qwen_eval.sh --hoststr "$hoststr" --model_name_or_path /opt/nas/p/zhubin/saved_checkpoint/0328_Qwen2.5-14B-Instruct_neft_accdb_markdown_wd_ep3_lr7e6_bs1/checkpoint-1426 \
+# 	--eval_dataset callsum_v7_test_markdown --output_name "callsum_v7_test_markdown" --finetuning_type full
+
+# ./Qwen_eval.sh --hoststr "$hoststr" --model_name_or_path /opt/nas/p/zhubin/saved_checkpoint/0328_Qwen2.5-14B-Instruct_neft_accdb_markdown_wd_ep3_lr7e6_bs1/checkpoint-1426 \
+# 	--eval_dataset diting_v7.2_markdown --output_name "business_test_v2" --finetuning_type full
+
+# ./Qwen_eval.sh --hoststr "$hoststr" --model_name_or_path /opt/nas/p/zhubin/saved_checkpoint/0329_Qwen2.5-14B-Instruct_neft_icdb_markdown_wd_ep2_lr7e6_bs1/checkpoint-1079 \
+# 	--eval_dataset callsum_v7_test_markdown --output_name "callsum_v7_test_markdown" --finetuning_type full
+
+# ./Qwen_eval.sh --hoststr "$hoststr" --model_name_or_path /opt/nas/p/zhubin/saved_checkpoint/0329_Qwen2.5-14B-Instruct_neft_icdb_markdown_wd_ep2_lr7e6_bs1/checkpoint-1079 \
+# 	--eval_dataset diting_v7.2_markdown --output_name "business_test_v2" --finetuning_type full
+
+# ./Qwen_eval.sh --hoststr "$hoststr" --model_name_or_path /opt/nas/p/zhubin/saved_checkpoint/0402_Qwen2.5-14B-Instruct_neft5_accdb_markdown_wd_ep3_lr7e6_bs1/checkpoint-719 \
+# 	--eval_dataset callsum_v7_test_markdown --output_name "callsum_v7_test_markdown" --finetuning_type full
+
+# ./Qwen_eval.sh --hoststr "$hoststr" --model_name_or_path /opt/nas/p/zhubin/saved_checkpoint/0402_Qwen2.5-14B-Instruct_neft5_accdb_markdown_wd_ep3_lr7e6_bs1/checkpoint-719 \
+# 	--eval_dataset diting_v7.2_markdown --output_name "business_test_v2" --finetuning_type full
+
+# ./Qwen_eval.sh --hoststr "$hoststr" --model_name_or_path /opt/nas/p/zhubin/saved_checkpoint/0402_Qwen2.5-14B-Instruct_neft5_accdb_markdown_wd_ep3_lr7e6_bs1/checkpoint-1438 \
+# 	--eval_dataset callsum_v7_test_markdown --output_name "callsum_v7_test_markdown" --finetuning_type full
+
+# ./Qwen_eval.sh --hoststr "$hoststr" --model_name_or_path /opt/nas/p/zhubin/saved_checkpoint/0402_Qwen2.5-14B-Instruct_neft5_accdb_markdown_wd_ep3_lr7e6_bs1/checkpoint-1438 \
+# 	--eval_dataset diting_v7.2_markdown --output_name "business_test_v2" --finetuning_type full
+
+# ./Qwen_eval.sh --hoststr "$hoststr" --model_name_or_path /opt/nas/p/zhubin/saved_checkpoint/0402_Qwen2.5-14B-Instruct_neft5_accdb_markdown_wd_ep3_lr7e6_bs1/checkpoint-2154 \
+# 	--eval_dataset callsum_v7_test_markdown --output_name "callsum_v7_test_markdown" --finetuning_type full
+
+# ./Qwen_eval.sh --hoststr "$hoststr" --model_name_or_path /opt/nas/p/zhubin/saved_checkpoint/0402_Qwen2.5-14B-Instruct_neft5_accdb_markdown_wd_ep3_lr7e6_bs1/checkpoint-2154 \
+# 	--eval_dataset diting_v7.2_markdown --output_name "business_test_v2" --finetuning_type full
+
+# ./Qwen_eval.sh --hoststr "$hoststr" --model_name_or_path /opt/nas/p/zhubin/saved_checkpoint/0423_Qwen2.5-14B-Instruct_neft5_afcdbzd_v8_v7_markdown_wd_ep2_lr7e6_bs1/checkpoint-1355/ \
+# 	--eval_dataset callsum_v8_test_markdown --output_name "callsum_v8_test_markdown" --finetuning_type full
+
+# ./Qwen_eval.sh --hoststr "$hoststr" --model_name_or_path /opt/nas/p/zhubin/saved_checkpoint/0423_Qwen2.5-14B-Instruct_neft5_afcdbzd_v8_v7_markdown_wd_ep2_lr7e6_bs1/checkpoint-1355/ \
+# 	--eval_dataset diting_v8.2_markdown --output_name "business_test_v2" --finetuning_type full
+
+# ./Qwen_eval.sh --hoststr "$hoststr" --model_name_or_path /opt/nas/p/zhubin/saved_checkpoint/0423_Qwen2.5-14B-Instruct_neft5_afcdbzd_v8_v7_markdown_wd_ep2_lr7e6_bs1/checkpoint-2708/ \
+# 	--eval_dataset callsum_v8_test_markdown --output_name "callsum_v8_test_markdown" --finetuning_type full
+
+# ./Qwen_eval.sh --hoststr "$hoststr" --model_name_or_path /opt/nas/p/zhubin/saved_checkpoint/0423_Qwen2.5-14B-Instruct_neft5_afcdbzd_v8_v7_markdown_wd_ep2_lr7e6_bs1/checkpoint-2708/ \
+# 	--eval_dataset diting_v8.2_markdown --output_name "business_test_v2" --finetuning_type full
+
+# ./Qwen_eval.sh --hoststr "$hoststr" --model_name_or_path /opt/nas/p/zhubin/saved_checkpoint/0423_Qwen2.5-14B-Instruct_neft5_afcdbzd_v8_v7_markdown_wd_ep2_lr1e5_bs1/checkpoint-2708/ \
+# 	--eval_dataset callsum_v8_test_markdown --output_name "callsum_v8_test_markdown" --finetuning_type full
+
+# ./Qwen_eval.sh --hoststr "$hoststr" --model_name_or_path /opt/nas/p/zhubin/saved_checkpoint/0423_Qwen2.5-14B-Instruct_neft5_afcdbzd_v8_v7_markdown_wd_ep2_lr1e5_bs1/checkpoint-2708/ \
+# 	--eval_dataset diting_v8.2_markdown --output_name "business_test_v2" --finetuning_type full
+
+# ./Qwen_eval.sh --hoststr "$hoststr" --template qwen3 --model_name_or_path /opt/nas/p/models/Qwen_models/Qwen3-4B/ \
+# 	--finetuning_type lora --adapter_name_or_path /opt/nas/p/zhubin/saved_checkpoint/0429_Qwen3-4B-Instruct_neft5_accdb_markdown_lora_ep2_lr2e4_bs4/checkpoint-1430/ \
+# 	--eval_dataset callsum_v6_test_markdown --output_name "callsum_v6_test_markdown"
+
+# ./Qwen_eval.sh --hoststr "$hoststr" --template qwen3 --model_name_or_path /opt/nas/p/models/Qwen_models/Qwen3-4B/ \
+# 	--finetuning_type lora --adapter_name_or_path /opt/nas/p/zhubin/saved_checkpoint/0429_Qwen3-4B-Instruct_neft5_accdb_markdown_lora_ep2_lr2e4_bs4/checkpoint-715/ \
+# 	--eval_dataset callsum_v6_test_markdown --output_name "callsum_v6_test_markdown"
+
+# ./Qwen_eval.sh --hoststr "$hoststr" --template qwen3 --model_name_or_path /opt/nas/p/models/Qwen_models/Qwen3-4B/ \
+# 	--finetuning_type lora --adapter_name_or_path /opt/nas/p/zhubin/saved_checkpoint/0429_Qwen3-4B-Instruct_neft5_accdb_markdown_lora_ep2_lr2e4_bs4/checkpoint-2142/ \
+# 	--eval_dataset callsum_v6_test_markdown --output_name "callsum_v6_test_markdown"
+
+# ./Qwen_eval.sh --hoststr "$hoststr" --template qwen3 --model_name_or_path /opt/nas/p/models/Qwen_models/Qwen3-1.7B/ \
+# 	--finetuning_type lora --adapter_name_or_path /opt/nas/p/zhubin/saved_checkpoint/0429_Qwen3-1.7B-Instruct_neft5_accdb_markdown_lora_ep2_lr2e4_bs4/checkpoint-715/ \
+# 	--eval_dataset callsum_v6_test_markdown --output_name "callsum_v6_test_markdown"
+
+# ./Qwen_eval.sh --hoststr "$hoststr" --template qwen3 --model_name_or_path /opt/nas/p/models/Qwen_models/Qwen3-1.7B/ \
+# 	--finetuning_type lora --adapter_name_or_path /opt/nas/p/zhubin/saved_checkpoint/0429_Qwen3-1.7B-Instruct_neft5_accdb_markdown_lora_ep2_lr2e4_bs4/checkpoint-1430/ \
+# 	--eval_dataset callsum_v6_test_markdown --output_name "callsum_v6_test_markdown"
+
+# ./Qwen_eval.sh --hoststr "$hoststr" --template qwen3 --model_name_or_path /opt/nas/p/models/Qwen_models/Qwen3-1.7B/ \
+# 	--finetuning_type lora --adapter_name_or_path /opt/nas/p/zhubin/saved_checkpoint/0429_Qwen3-1.7B-Instruct_neft5_accdb_markdown_lora_ep2_lr2e4_bs4/checkpoint-2142 \
+# 	--eval_dataset callsum_v6_test_markdown --output_name "callsum_v6_test_markdown"
+
+# ./Qwen_eval.sh --hoststr "$hoststr" --template qwen3 --model_name_or_path /opt/nas/p/models/Qwen_models/Qwen3-1.7B/ \
+# 	--finetuning_type lora --adapter_name_or_path /opt/nas/p/zhubin/saved_checkpoint/0430_Qwen3-1.7B-Instruct_neft5_cdb_markdown_lora32_alpha1_ep2_lr2e4_bs4/checkpoint-299 \
+# 	--eval_dataset callsum_v6_test_markdown --output_name "callsum_v6_test_markdown"
+
+# ./Qwen_eval.sh --hoststr "$hoststr" --template qwen3 --model_name_or_path /opt/nas/p/models/Qwen_models/Qwen3-1.7B/ \
+# 	--finetuning_type lora --adapter_name_or_path /opt/nas/p/zhubin/saved_checkpoint/0430_Qwen3-1.7B-Instruct_neft5_cdb_markdown_lora32_alpha1_ep2_lr2e4_bs4/checkpoint-596 \
+# 	--eval_dataset callsum_v6_test_markdown --output_name "callsum_v6_test_markdown"
+
+# ./Qwen_eval.sh --hoststr "$hoststr" --template qwen3 --model_name_or_path /opt/nas/p/models/Qwen_models/Qwen3-4B/ \
+# 	--finetuning_type lora --adapter_name_or_path /opt/nas/p/zhubin/saved_checkpoint/0430_Qwen3-4B-Instruct_neft5_cdb_markdown_lora32_alpha1_ep2_lr2e4_bs4/checkpoint-299 \
+# 	--eval_dataset callsum_v6_test_markdown --output_name "callsum_v6_test_markdown"
+
+# ./Qwen_eval.sh --hoststr "$hoststr" --template qwen3 --model_name_or_path /opt/nas/p/models/Qwen_models/Qwen3-4B/ \
+# 	--finetuning_type lora --adapter_name_or_path /opt/nas/p/zhubin/saved_checkpoint/0430_Qwen3-4B-Instruct_neft5_cdb_markdown_lora32_alpha1_ep2_lr2e4_bs4/checkpoint-299 \
+# 	--eval_dataset callsum_v6_test_markdown --output_name "callsum_v6_test_markdown"
+
+
+# ./Qwen_eval.sh --hoststr "$hoststr" --model_name_or_path /opt/nas/p/zhubin/saved_checkpoint/0508_Qwen2.5-14B-Instruct_neft5_afcdbzd_v9_v7_markdown_wd_ep2_lr7e6_bs1/checkpoint-1355 \
+# 	--eval_dataset callsum_v9_test_markdown --output_name "callsum_v9_test_markdown" --finetuning_type full
+
+# ./Qwen_eval.sh --hoststr "$hoststr" --model_name_or_path /opt/nas/p/zhubin/saved_checkpoint/0508_Qwen2.5-14B-Instruct_neft5_afcdbzd_v9_v7_markdown_wd_ep2_lr7e6_bs1/checkpoint-1355 \
+# 	--eval_dataset diting_v9.2_markdown --output_name "business_test_v2" --finetuning_type full
+
+
+# ./Qwen_eval.sh --hoststr "$hoststr" --model_name_or_path /opt/nas/p/zhubin/saved_checkpoint/0508_Qwen2.5-14B-Instruct_neft5_afcdbzd_v9_v7_markdown_wd_ep2_lr7e6_bs1/checkpoint-2708 \
+# 	--eval_dataset callsum_v9_test_markdown --output_name "callsum_v9_test_markdown" --finetuning_type full
+
+# ./Qwen_eval.sh --hoststr "$hoststr" --model_name_or_path /opt/nas/p/zhubin/saved_checkpoint/0508_Qwen2.5-14B-Instruct_neft5_afcdbzd_v9_v7_markdown_wd_ep2_lr7e6_bs1/checkpoint-2708 \
+# 	--eval_dataset diting_v9.2_markdown --output_name "business_test_v2" --finetuning_type full
+
+
+./Qwen_eval.sh --hoststr "$hoststr" --model_name_or_path /opt/nas/p/zhubin/saved_checkpoint/0509_Qwen2.5-14B-Instruct_neft5_afcdbzd_v9_v7_markdown_wd_ep2_lr1e5_bs1/checkpoint-1355 \
+	--eval_dataset callsum_v9_test_markdown --output_name "callsum_v9_test_markdown" --finetuning_type full
+
+./Qwen_eval.sh --hoststr "$hoststr" --model_name_or_path /opt/nas/p/zhubin/saved_checkpoint/0509_Qwen2.5-14B-Instruct_neft5_afcdbzd_v9_v7_markdown_wd_ep2_lr1e5_bs1/checkpoint-1355 \
+	--eval_dataset diting_v9.2_markdown --output_name "business_test_v2" --finetuning_type full
+
+
+./Qwen_eval.sh --hoststr "$hoststr" --model_name_or_path /opt/nas/p/zhubin/saved_checkpoint/0509_Qwen2.5-14B-Instruct_neft5_afcdbzd_v9_v7_markdown_wd_ep2_lr1e5_bs1/checkpoint-2708 \
+	--eval_dataset callsum_v9_test_markdown --output_name "callsum_v9_test_markdown" --finetuning_type full
+
+./Qwen_eval.sh --hoststr "$hoststr" --model_name_or_path /opt/nas/p/zhubin/saved_checkpoint/0509_Qwen2.5-14B-Instruct_neft5_afcdbzd_v9_v7_markdown_wd_ep2_lr1e5_bs1/checkpoint-2708 \
+	--eval_dataset diting_v9.2_markdown --output_name "business_test_v2" --finetuning_type full

@@ -44,10 +44,24 @@ vc -proxy open
 # 	--save_strategy epoch --save_total_limit 100 \
 # 	--neftune_noise_alpha 5 --eval_dataset callsum_v7_test_markdown --eval_strategy steps --eval_steps 500 --warmup_ratio 0.03
 
-./llmtrain.sh --do_train --do_eval --hostfile /opt/nas/p/zhubin/code/Llmtrain/cache/hostfile \
-	--stage sft --finetuning_type full --name=0327_Qwen2.5-14B-Instruct_neft_accdb_markdown_wd_ep3_lr7e6_bs1 \
-	--model_name_or_path /opt/nas/p/models/Qwen_models/Qwen2.5-14B-Instruct --template qwen \
-	--dataset alpace_gpt4_zh_retain,COIG_PC_core_summary_part,callsum_v7.1_train_markdown,diting_v7.2_markdown,beta_noise_v7.1_markdown \
-	--batch_size 1 --gradient_accumulation_steps 16 --cutoff_len 4096 --epochs 3 --lr 7e-6 --weight_decay 0.1 \
-	--save_strategy epoch --save_total_limit 100  --seed 24 \
-	--neftune_noise_alpha 15 --eval_dataset callsum_v7_test_markdown --eval_strategy steps --eval_steps 500 --warmup_ratio 0.05
+# ./llmtrain.sh --do_train --do_eval --hostfile /opt/nas/p/zhubin/code/Llmtrain/cache/hostfile \
+# 	--stage sft --finetuning_type full --name=0328_Qwen2.5-14B-Instruct_neft_accdb_markdown_wd_ep3_lr7e6_bs1 \
+# 	--model_name_or_path /opt/nas/p/models/Qwen_models/Qwen2.5-14B-Instruct --template qwen \
+# 	--dataset alpace_gpt4_zh_retain,COIG_PC_core_summary_part,callsum_v7.1_train_markdown,diting_v7.2_markdown,beta_noise_v7.1_markdown \
+# 	--batch_size 1 --gradient_accumulation_steps 16 --cutoff_len 4096 --epochs 3 --lr 7e-6 --weight_decay 0.1 \
+# 	--save_strategy epoch --save_total_limit 100 --seed 42 \
+# 	--neftune_noise_alpha 15 --eval_dataset callsum_v7_test_markdown --eval_strategy steps --eval_steps 500 --warmup_ratio 0.05
+
+
+# ./llmtrain.sh --do_train --do_eval --hostfile /opt/nas/p/zhubin/code/Llmtrain/cache/hostfile \
+# 	--stage sft --finetuning_type full --name=0402_Qwen2.5-14B-Instruct_neft_accdb_markdown_wd_ep3_lr7e6_bs1 \
+# 	--model_name_or_path /opt/nas/p/models/Qwen_models/Qwen2.5-14B-Instruct --template qwen \
+# 	--dataset Inf_gen_100k,callsum_v7.1_train_markdown,diting_v7.2_markdown,beta_noise_v7.1_markdown \
+# 	--batch_size 1 --gradient_accumulation_steps 16 --cutoff_len 4096 --epochs 3 --lr 7e-6 --weight_decay 0.1 \
+# 	--save_strategy epoch --save_total_limit 100 --seed 42 \
+# 	--neftune_noise_alpha 5 --eval_dataset callsum_v7_test_markdown --eval_strategy steps --eval_steps 500 --warmup_ratio 0.03
+
+
+./Qwen_eval.sh --hoststr "$hoststr" --template qwen3 --model_name_or_path /opt/nas/p/models/Qwen_models/Qwen3-4B/ \
+	--finetuning_type lora --adapter_name_or_path /opt/nas/p/zhubin/saved_checkpoint/0430_Qwen3-4B-Instruct_neft5_cdb_markdown_lora32_alpha1_ep2_lr2e4_bs4/checkpoint-300 \
+	--eval_dataset callsum_v6_test_markdown --output_name "callsum_v6_test_markdown"

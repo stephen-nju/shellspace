@@ -76,10 +76,14 @@ export eval_dataset
 export eval_steps
 export eval_strategy=no
 
+## enable_thinking
+export enable_thinking=false
+export enable_liger_kernel=false
+export flash_attn="auto"
 options=$(getopt -l "help,do_train,do_eval,stage:,model_name_or_path:,name:,epochs:,lr:,batch_size:,template:,\
 finetuning_type:,dataset:,cutoff_len:,include:,resize_vocab:,gradient_accumulation_steps:,eval_dataset:,eval_strategy:,eval_steps:,\
-pref_loss:,pref_beta:,simpo_gamma:,ddp_timeout:,neftune_noise_alpha:,hostfile:,weight_decay:,max_grad_norm:,\
-lora_rank:,lora_alpha:,lora_target:,lora_dropout:,loraplus_lr_ratio:,loraplus_lr_embedding:,seed:,\
+pref_loss:,pref_beta:,simpo_gamma:,ddp_timeout:,neftune_noise_alpha:,hostfile:,weight_decay:,max_grad_norm:,flash_attn:,\
+lora_rank:,lora_alpha:,lora_target:,lora_dropout:,loraplus_lr_ratio:,loraplus_lr_embedding:,seed:,enable_thinking:,enable_liger_kernel:,\
 save_steps:,save_total_limit:,logging_steps:,warmup_ratio:,save_strategy:" -o "e:l:d:b:n:m:g:" -a -- "$@")
 
 eval set -- "$options"
@@ -237,6 +241,18 @@ while true; do
 		shift
 		seed="$1"
 		;;
+	--enable_thinking)
+		shift
+		enable_thinking="$1"
+		;;
+	--enable_liger_kernel)
+		shift
+		enable_liger_kernel="$1"
+		;;
+	--flash_attn)
+		shift
+		flash_attn="$1"
+		;;
 	--)
 		shift
 		break
@@ -266,6 +282,10 @@ fi
 deepspeed_params=()
 if [[ -n $include ]]; then
 	deepspeed_params+=(--include $include)
+fi
+
+if [[ $enable_thinking = true ]]; then
+	echo ">>>> thinking is enabled, pay attention to your dataset"
 fi
 
 export OUTPUT_DIR=/opt/nas/p/zhubin/saved_checkpoint/$name
@@ -302,6 +322,7 @@ deepspeed --hostfile=$hostfile --master_port=${MASTER_PORT} "${deepspeed_params[
 	--lora_rank ${lora_rank} \
 	--lora_target ${lora_target} \
 	--lora_dropout ${lora_dropout} \
+	--lora_alpha ${lora_alpha} \
 	--loraplus_lr_embedding ${loraplus_lr_embedding} \
 	--warmup_ratio ${warmup_ratio} \
 	--logging_steps ${logging_steps} \
@@ -321,5 +342,8 @@ deepspeed --hostfile=$hostfile --master_port=${MASTER_PORT} "${deepspeed_params[
 	--learning_rate ${lr} \
 	--ddp_timeout ${ddp_timeout} \
 	--bf16 true \
+	--enable_thinking ${enable_thinking} \
+	--enable_liger_kernel ${enable_liger_kernel} \
+	--flash_attn ${flash_attn} \
 	"${optional_params[@]}" \
 	2>&1 | tee ${OUTPUT_DIR}/train.log

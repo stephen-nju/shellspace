@@ -56,7 +56,7 @@ if [[ $finetuning_type == "lora" ]]; then
 		--temperature 0 \
 		--max_batch_size 32 \
 		--max_new_tokens 512 \
-		--system 'You are a helpful assistant.'
+
 elif [[ $finetuning_type == "full" ]]; then
 	NPROC_PER_NODE=8 \
 	CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 \
@@ -66,5 +66,5 @@ elif [[ $finetuning_type == "full" ]]; then
 		--temperature 0 \
 		--max_batch_size 32 \
 		--max_new_tokens 512 \
-		--system 'You are a helpful assistant.'
+
 fi

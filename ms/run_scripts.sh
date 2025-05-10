@@ -134,7 +134,7 @@ export alpaca_gpt4_zh_retain=$dataset_dir/alpaca_gpt4_zh_retain.jsonl
 
 ./mstrain.sh --do_train --do_eval --stage sft --finetuning_type lora --template qwen2_5 --lora_rank 32 --lora_target all-linear --loraplus_lr_ratio 16 \
 	--model_name_or_path /opt/nas/p/models/Qwen_models/Qwen2-1.5B \
-	--name 0210_ms_Qwen2-1.5B_lud_template_qwen_lorap16_ep5_lr1e4_bs4 \
+	--name TEST_MS \
 	--dataset $union_conversations_v5_norm_markdown,$union_conversations_v4_ll_markdown,$diting_v1_markdown,$liantong_conversations_v1_markdown \
 	--gradient_accumulation_steps=4 --max_length=4096 --epochs=5 --batch_size 4 --lr=1e-4 --save_strategy=epoch --warmup_ratio 0.1 --save_total_limit=10 \
 	--eval_dataset $union_conversations_v5_dev_markdown --eval_strategy steps --eval_steps 500 \

@@ -1,6 +1,6 @@
-export dataset_dir=/opt/nas/p/zhubin/DATA/train_data/openai
-export union_conversations_v5_dev_markdown=$dataset_dir/union_conversations_v5/union_conversation_v5.4_iio_llf_dev_openai_markdownv1.jsonl
-export alpaca_gpt4_zh_retain_eval=$dataset_dir/alpaca_gpt4_zh_retain_eval.jsonl
+# export dataset_dir=/opt/nas/p/zhubin/DATA/train_data/openai
+# export union_conversations_v5_dev_markdown=$dataset_dir/union_conversations_v5/union_conversation_v5.4_iio_llf_dev_openai_markdownv1.jsonl
+# export alpaca_gpt4_zh_retain_eval=$dataset_dir/alpaca_gpt4_zh_retain_eval.jsonl
 
 # ./mseval.sh --eval_dataset $union_conversations_v5_dev_markdown \
 # --adapters=/opt/nas/p/zhubin/saved_checkpoint/swifttest/v3-20250206-103024/checkpoint-1586
@@ -126,3 +126,8 @@ export alpaca_gpt4_zh_retain_eval=$dataset_dir/alpaca_gpt4_zh_retain_eval.jsonl
 
 # ./mseval.sh --finetuning_type lora --eval_dataset $union_conversations_v5_dev_markdown \
 # --adapters=/opt/nas/p/zhubin/saved_checkpoint/0210_ms_Qwen2-1.5B_lud_template_default_lorap16_ep5_lr5e4_bs4/v0-20250210-094605/checkpoint-199
+
+export callsum_v6_test_markdown=/opt/nas/p/zhubin/DATA/train_data/no_think/conversations_full_iio_test_v6_markdown_no_think.json
+
+./mseval.sh --finetuning_type lora --eval_dataset $callsum_v6_test_markdown \
+--adapters=/opt/nas/p/zhubin/saved_checkpoint/ms_0430_Qwen3-1.7B_accdb_neft5_r32_lorap16_ep3_lr1e4_bs4/v0-20250430-094000/checkpoint-420
