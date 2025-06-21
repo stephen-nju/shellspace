@@ -17,8 +17,9 @@ export template=qwen
 export output_dir
 export output_name=output
 export batch_size=4
-options=$(getopt -l "help,model_name_or_path:,hoststr:,adapter_name_or_path:,eval_dataset:,finetuning_type:,template:,output_name:,batch_size:
-" -o "h:d:t:n:m:g:" -a -- "$@")
+export enable_thinking=false
+
+options=$(getopt -l "help,model_name_or_path:,hoststr:,adapter_name_or_path:,eval_dataset:,finetuning_type:,template:,output_name:,batch_size:,enable_thinking:" -o "h:d:t:n:m:g:" -a -- "$@")
 
 eval set -- "$options"
 # echo "$options"
@@ -60,6 +61,10 @@ while true; do
 		shift
 		batch_size="$1"
 		;;
+	--enable_thinking)
+		shift
+		enable_thinking="$1"
+		;;
 	--)
 		shift
 		break
@@ -67,6 +72,10 @@ while true; do
 	esac
 	shift
 done
+
+if [[ $enable_thinking = true ]]; then
+	echo ">>>> thinking is enabled, pay attention to your dataset"
+fi
 
 optional_params=()
 if [[ -z $output_dir ]]; then
@@ -96,6 +105,7 @@ attrun \
 	--output_dir ${output_dir} \
 	--cutoff_len 4096 \
 	--max_new_tokens 512 \
+	--enable_thinking ${enable_thinking} \
 	--do_sample false \
 	--per_device_eval_batch_size ${batch_size} \
 	--predict_with_generate \
