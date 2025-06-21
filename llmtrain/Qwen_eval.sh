@@ -6,7 +6,7 @@ Usage:eval dataset
 EOF
 }
 
-export PROJECT_PATH=/opt/nas/p/zhubin/code/Llmtrain/
+export PROJECT_PATH=/opt/nas/n/zb/code/Llmtrain/
 cd ${PROJECT_PATH}
 export hoststr='node12 slots=8'
 export model_name_or_path
@@ -16,7 +16,9 @@ export finetuning_type=lora
 export template=qwen
 export output_dir
 export output_name=output
-options=$(getopt -l "help,model_name_or_path:,hoststr:,adapter_name_or_path:,eval_dataset:,finetuning_type:,template:,output_name:" -o "h:d:t:n:m:g:" -a -- "$@")
+export batch_size=4
+options=$(getopt -l "help,model_name_or_path:,hoststr:,adapter_name_or_path:,eval_dataset:,finetuning_type:,template:,output_name:,batch_size:
+" -o "h:d:t:n:m:g:" -a -- "$@")
 
 eval set -- "$options"
 # echo "$options"
@@ -53,6 +55,10 @@ while true; do
 	--output_name)
 		shift
 		output_name="$1"
+		;;
+	--batch_size)
+		shift
+		batch_size="$1"
 		;;
 	--)
 		shift
@@ -91,7 +97,7 @@ attrun \
 	--cutoff_len 4096 \
 	--max_new_tokens 512 \
 	--do_sample false \
-	--per_device_eval_batch_size 2 \
+	--per_device_eval_batch_size ${batch_size} \
 	--predict_with_generate \
 	--overwrite_output_dir true \
 	"${optional_params[@]}"

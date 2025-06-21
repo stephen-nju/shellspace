@@ -20,8 +20,8 @@ export NCCL_NET_GDR_LEVEL=2
 export NCCL_IB_HCA=$NCCL_IB_HCA #腾讯云H800服务器，可以将此参数注释掉
 export NCCL_ALGO=Ring
 
-export DS_ENV_FILE=/opt/nas/p/zhubin/code/Llmtrain/.deepspeed_env
-export PROJECT_PATH=/opt/nas/p/zhubin/code/Llmtrain/
+export DS_ENV_FILE=/opt/nas/n/zb/code/Llmtrain/.deepspeed_env
+export PROJECT_PATH=/opt/nas/n/zb/code/Llmtrain/
 export HF_HOME=/opt/local/data/
 
 cd ${PROJECT_PATH}
@@ -43,7 +43,7 @@ export finetuning_type=full
 export batch_size=4
 export weight_decay=0
 export max_grad_norm=1
-export hostfile=/opt/nas/p/zhubin/code/Llmtrain/config/hostfile
+export hostfile=/opt/nas/n/zb/code/Llmtrain/config/hostfile
 export include
 export gradient_accumulation_steps=1
 export model_name_or_path
@@ -82,7 +82,7 @@ export enable_liger_kernel=false
 export flash_attn="auto"
 options=$(getopt -l "help,do_train,do_eval,stage:,model_name_or_path:,name:,epochs:,lr:,batch_size:,template:,\
 finetuning_type:,dataset:,cutoff_len:,include:,resize_vocab:,gradient_accumulation_steps:,eval_dataset:,eval_strategy:,eval_steps:,\
-pref_loss:,pref_beta:,simpo_gamma:,ddp_timeout:,neftune_noise_alpha:,hostfile:,weight_decay:,max_grad_norm:,flash_attn:,\
+pref_loss:,pref_beta:,simpo_gamma:,ddp_timeout:,neftune_noise_alpha:,hostfile:,weight_decay:,max_grad_norm:,flash_attn:,max_samples:,\
 lora_rank:,lora_alpha:,lora_target:,lora_dropout:,loraplus_lr_ratio:,loraplus_lr_embedding:,seed:,enable_thinking:,enable_liger_kernel:,\
 save_steps:,save_total_limit:,logging_steps:,warmup_ratio:,save_strategy:" -o "e:l:d:b:n:m:g:" -a -- "$@")
 
@@ -253,6 +253,10 @@ while true; do
 		shift
 		flash_attn="$1"
 		;;
+	--max_samples)
+		shift
+		max_samples="$1"
+		;;
 	--)
 		shift
 		break
@@ -273,6 +277,10 @@ if [[ -n $loraplus_lr_ratio ]]; then
 	optional_params+=(--loraplus_lr_ratio ${loraplus_lr_ratio})
 fi
 
+if [[ -n $max_samples ]]; then
+	optional_params+=(--max_samples ${max_samples})
+fi
+
 if [[ ${do_eval} = true ]]; then
 	optional_params+=(--eval_dataset ${eval_dataset})
 	optional_params+=(--eval_strategy ${eval_strategy})
@@ -288,7 +296,7 @@ if [[ $enable_thinking = true ]]; then
 	echo ">>>> thinking is enabled, pay attention to your dataset"
 fi
 
-export OUTPUT_DIR=/opt/nas/p/zhubin/saved_checkpoint/$name
+export OUTPUT_DIR=/opt/nas/n/zb/saved_checkpoint/$name
 export WANDB_DIR=$OUTPUT_DIR/logs
 
 mkdir -p ${OUTPUT_DIR}

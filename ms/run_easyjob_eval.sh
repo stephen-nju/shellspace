@@ -138,3 +138,5 @@ export alpaca_gpt4_zh_retain_eval=$dataset_dir/alpaca_gpt4_zh_retain_eval.jsonl
 # 	--adapters=/opt/nas/p/zhubin/saved_checkpoint/0210_ms_Qwen2-1.5B_lud_template_qwen_lorap16_ep5_lr1e4_bs4/v0-20250210-151559/checkpoint-796
 # ./mseval.sh --finetuning_type lora --eval_dataset $union_conversations_v5_dev_markdown \
 # 	--adapters=/opt/nas/p/zhubin/saved_checkpoint/0210_ms_Qwen2-1.5B_lud_template_qwen_lorap16_ep5_lr1e4_bs4/v0-20250210-151559/checkpoint-990
+
+

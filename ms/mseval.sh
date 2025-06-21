@@ -49,22 +49,22 @@ done
 if [[ $finetuning_type == "lora" ]]; then
 
 	NPROC_PER_NODE=8 \
-	CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 \
-	swift infer --adapters ${adapters} \
+		CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 \
+		swift infer --adapters ${adapters} \
 		--val_dataset $eval_dataset \
 		--infer_backend pt \
 		--temperature 0 \
 		--max_batch_size 32 \
-		--max_new_tokens 512 \
+		--max_new_tokens 512
 
 elif [[ $finetuning_type == "full" ]]; then
 	NPROC_PER_NODE=8 \
-	CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 \
-	swift infer --model ${model} \
+		CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 \
+		swift infer --model ${model} \
 		--val_dataset $eval_dataset \
 		--infer_backend pt \
 		--temperature 0 \
 		--max_batch_size 32 \
-		--max_new_tokens 512 \
+		--max_new_tokens 512
 
 fi

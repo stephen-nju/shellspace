@@ -219,15 +219,15 @@ export HF_HOME=/opt/local/data/
 # 	--eval_dataset diting_v9.2_markdown --output_name "business_test_v2" --finetuning_type full
 
 
-./Qwen_eval.sh --hoststr "$hoststr" --model_name_or_path /opt/nas/p/zhubin/saved_checkpoint/0509_Qwen2.5-14B-Instruct_neft5_afcdbzd_v9_v7_markdown_wd_ep2_lr1e5_bs1/checkpoint-1355 \
-	--eval_dataset callsum_v9_test_markdown --output_name "callsum_v9_test_markdown" --finetuning_type full
+# ./Qwen_eval.sh --hoststr "$hoststr" --model_name_or_path /opt/nas/p/zhubin/saved_checkpoint/0509_Qwen2.5-14B-Instruct_neft5_afcdbzd_v9_v7_markdown_wd_ep2_lr1e5_bs1/checkpoint-1355 \
+# 	--eval_dataset callsum_v9_test_markdown --output_name "callsum_v9_test_markdown" --finetuning_type full
 
-./Qwen_eval.sh --hoststr "$hoststr" --model_name_or_path /opt/nas/p/zhubin/saved_checkpoint/0509_Qwen2.5-14B-Instruct_neft5_afcdbzd_v9_v7_markdown_wd_ep2_lr1e5_bs1/checkpoint-1355 \
-	--eval_dataset diting_v9.2_markdown --output_name "business_test_v2" --finetuning_type full
+# ./Qwen_eval.sh --hoststr "$hoststr" --model_name_or_path /opt/nas/p/zhubin/saved_checkpoint/0509_Qwen2.5-14B-Instruct_neft5_afcdbzd_v9_v7_markdown_wd_ep2_lr1e5_bs1/checkpoint-1355 \
+# 	--eval_dataset diting_v9.2_markdown --output_name "business_test_v2" --finetuning_type full
 
 
-./Qwen_eval.sh --hoststr "$hoststr" --model_name_or_path /opt/nas/p/zhubin/saved_checkpoint/0509_Qwen2.5-14B-Instruct_neft5_afcdbzd_v9_v7_markdown_wd_ep2_lr1e5_bs1/checkpoint-2708 \
-	--eval_dataset callsum_v9_test_markdown --output_name "callsum_v9_test_markdown" --finetuning_type full
+# ./Qwen_eval.sh --hoststr "$hoststr" --model_name_or_path /opt/nas/p/zhubin/saved_checkpoint/0509_Qwen2.5-14B-Instruct_neft5_afcdbzd_v9_v7_markdown_wd_ep2_lr1e5_bs1/checkpoint-2708 \
+# 	--eval_dataset callsum_v9_test_markdown --output_name "callsum_v9_test_markdown" --finetuning_type full
 
-./Qwen_eval.sh --hoststr "$hoststr" --model_name_or_path /opt/nas/p/zhubin/saved_checkpoint/0509_Qwen2.5-14B-Instruct_neft5_afcdbzd_v9_v7_markdown_wd_ep2_lr1e5_bs1/checkpoint-2708 \
-	--eval_dataset diting_v9.2_markdown --output_name "business_test_v2" --finetuning_type full
+# ./Qwen_eval.sh --hoststr "$hoststr" --model_name_or_path /opt/nas/p/zhubin/saved_checkpoint/0509_Qwen2.5-14B-Instruct_neft5_afcdbzd_v9_v7_markdown_wd_ep2_lr1e5_bs1/checkpoint-2708 \
+# 	--eval_dataset diting_v9.2_markdown --output_name "business_test_v2" --finetuning_type full
