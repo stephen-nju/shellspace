@@ -444,23 +444,23 @@ export hoststr="nlp-nlpsumamd-0 slots=8"
 
 
 
-./Qwen_eval.sh  --hoststr "$hoststr" --model_name_or_path /opt/nas/n/xwgeng/Working/LLaMA-Factory/ckpts/depth_pruning_sft \
-	--adapter_name_or_path /opt/nas/n/zb/saved_checkpoint/0620_Qwen3-4B-pruning_afcdbzd_v9_v8_markdown_wd_ep2_lr2e4_bs4/checkpoint-339 \
-	--template qwen3 \
-	--eval_dataset callsum_v8_test_markdown --finetuning_type lora
+# ./Qwen_eval.sh  --hoststr "$hoststr" --model_name_or_path /opt/nas/n/xwgeng/Working/LLaMA-Factory/ckpts/depth_pruning_sft \
+# 	--adapter_name_or_path /opt/nas/n/zb/saved_checkpoint/0620_Qwen3-4B-pruning_afcdbzd_v9_v8_markdown_wd_ep2_lr2e4_bs4/checkpoint-339 \
+# 	--template qwen3 \
+# 	--eval_dataset callsum_v8_test_markdown --finetuning_type lora
 
-./Qwen_eval.sh  --hoststr "$hoststr" --model_name_or_path /opt/nas/n/xwgeng/Working/LLaMA-Factory/ckpts/depth_pruning_sft \
-	--adapter_name_or_path /opt/nas/n/zb/saved_checkpoint/0620_Qwen3-4B-pruning_afcdbzd_v9_v8_markdown_wd_ep2_lr2e4_bs4/checkpoint-339 \
-	--template qwen3 \
-	--eval_dataset callsum_v9_test_markdown --finetuning_type lora
-
-./Qwen_eval.sh  --hoststr "$hoststr" --model_name_or_path /opt/nas/n/xwgeng/Working/LLaMA-Factory/ckpts/depth_pruning_sft \
-	--adapter_name_or_path /opt/nas/n/zb/saved_checkpoint/0620_Qwen3-4B-pruning_afcdbzd_v9_v8_markdown_wd_ep2_lr2e4_bs4/checkpoint-676 \
-	--template qwen3 \
-	--eval_dataset callsum_v8_test_markdown --finetuning_type lora
+# ./Qwen_eval.sh  --hoststr "$hoststr" --model_name_or_path /opt/nas/n/xwgeng/Working/LLaMA-Factory/ckpts/depth_pruning_sft \
+# 	--adapter_name_or_path /opt/nas/n/zb/saved_checkpoint/0620_Qwen3-4B-pruning_afcdbzd_v9_v8_markdown_wd_ep2_lr2e4_bs4/checkpoint-339 \
+# 	--template qwen3 \
+# 	--eval_dataset callsum_v9_test_markdown --finetuning_type lora
 
 ./Qwen_eval.sh  --hoststr "$hoststr" --model_name_or_path /opt/nas/n/xwgeng/Working/LLaMA-Factory/ckpts/depth_pruning_sft \
 	--adapter_name_or_path /opt/nas/n/zb/saved_checkpoint/0620_Qwen3-4B-pruning_afcdbzd_v9_v8_markdown_wd_ep2_lr2e4_bs4/checkpoint-676 \
 	--template qwen3 \
-	--eval_dataset callsum_v9_test_markdown --finetuning_type lora
+	--eval_dataset callsum_v8_test_markdown --output_name callsum_v8 --finetuning_type lora
+
+./Qwen_eval.sh  --hoststr "$hoststr" --model_name_or_path /opt/nas/n/xwgeng/Working/LLaMA-Factory/ckpts/depth_pruning_sft \
+	--adapter_name_or_path /opt/nas/n/zb/saved_checkpoint/0620_Qwen3-4B-pruning_afcdbzd_v9_v8_markdown_wd_ep2_lr2e4_bs4/checkpoint-676 \
+	--template qwen3 \
+	--eval_dataset callsum_v9_test_markdown --output_name callsum_v9 --finetuning_type lora
 

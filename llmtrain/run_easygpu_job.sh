@@ -1,6 +1,9 @@
-exec >/opt/nas/p/zhubin/easyjobLog/pytorch.log
+exec >/opt/nas/n/zb/code/shellspace/easyjobLog/llmtrain.log
+
 echo "hoststr==${hoststr}"
-echo $hoststr | sed 's/,/\n/g' >/opt/nas/p/zhubin/code/Llmtrain/cache/hostfile
+echo $hoststr | sed 's/,/\n/g' >/opt/nas/n/zb/code/Llmtrain/cache/hostfile
+export DATE=$(date "+%m%d")
+echo "training scripts date ${DATE}"
 export HF_HOME=/opt/local/data/
 vc -proxy open
 # 配置wandb
@@ -62,6 +65,17 @@ vc -proxy open
 # 	--neftune_noise_alpha 5 --eval_dataset callsum_v7_test_markdown --eval_strategy steps --eval_steps 500 --warmup_ratio 0.03
 
 
-./Qwen_eval.sh --hoststr "$hoststr" --template qwen3 --model_name_or_path /opt/nas/p/models/Qwen_models/Qwen3-4B/ \
-	--finetuning_type lora --adapter_name_or_path /opt/nas/p/zhubin/saved_checkpoint/0430_Qwen3-4B-Instruct_neft5_cdb_markdown_lora32_alpha1_ep2_lr2e4_bs4/checkpoint-300 \
-	--eval_dataset callsum_v6_test_markdown --output_name "callsum_v6_test_markdown"
+# ./Qwen_eval.sh --hoststr "$hoststr" --template qwen3 --model_name_or_path /opt/nas/p/models/Qwen_models/Qwen3-4B/ \
+# 	--finetuning_type lora --adapter_name_or_path /opt/nas/p/zhubin/saved_checkpoint/0430_Qwen3-4B-Instruct_neft5_cdb_markdown_lora32_alpha1_ep2_lr2e4_bs4/checkpoint-300 \
+# 	--eval_dataset callsum_v6_test_markdown --output_name "callsum_v6_test_markdown"
+
+
+./llmtrain.sh --do_train --do_eval --hostfile ${hoststr} \
+	--stage sft --finetuning_type lora --lora_rank 32 --lora_alpha 1 --lora_target all --loraplus_lr_ratio 16 \
+	--name="${DATE}_Qwen3-4B_afcdbzd_v9_v8_markdown_wd_ep2_lr2e4_bs4" \
+	--model_name_or_path /opt/nas/n/zb/DATA/models/Qwen/Qwen3-4B --template qwen3 \
+	--dataset alpace_gpt4_zh_retain,firefly_summary_part,callsum_v9.1_train_markdown,diting_v9.2_markdown,beta_noise_v9.1_markdown,zdjt_v9_markdown,diting_fraud_v9_markdown,callsum_v8.1_train_markdown,diting_v8.2_markdown \
+	--batch_size 4 --gradient_accumulation_steps 16 --cutoff_len 4096 --epochs 2 --lr 2e-4 --weight_decay 0.1 \
+	--save_strategy epoch --save_total_limit 100 --seed 42 \
+	--eval_dataset callsum_v9_test_markdown --eval_strategy steps --eval_steps 500 --warmup_ratio 0.03 \
+	--enable_liger_kernel true --flash_attn fa2

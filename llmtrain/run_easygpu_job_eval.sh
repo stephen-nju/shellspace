@@ -1,9 +1,9 @@
-exec >/opt/nas/p/zhubin/easyjobLog/pytorch_eval.log
+exec >/opt/nas/n/zb/code/shellspace/easyjobLog/llmeval.log
 echo "hoststr==${hoststr}"
 echo "pwd==$(pwd)"
-echo $hoststr | sed 's/,/\n/g' >/opt/nas/p/zhubin/code/Llmtrain/cache/hostfile
+echo $hoststr | sed 's/,/\n/g' >/opt/nas/n/zb/code/Llmtrain/cache/hostfile
 export HF_HOME=/opt/local/data/
-# vc -proxy open
+vc -proxy open
 # 配置wandb
 # export WANDB_API_KEY=04c30ea6f4b2e78a13aa48f65ddeff512213be6c
 # export WANDB_MODE=offline
@@ -113,7 +113,7 @@ export HF_HOME=/opt/local/data/
 # ./Qwen_eval.sh --hoststr "$hoststr" --model_name_or_path /opt/nas/p/zhubin/saved_checkpoint/0327_Qwen2.5-14B-Instruct_neft_accdb_markdown_wd_ep3_lr7e6_bs1/checkpoint-2130 \
 # 	--eval_dataset diting_v7.2_markdown --output_name "business_test_v2" --finetuning_type full
 
-# ./Qwen_eval.sh --hoststr "$hoststr" --model_name_or_path /opt/nas/p/zhubin/saved_checkpoint/0327_Qwen2.5-14B-Instruct_neft_accdb_markdown_wd_ep3_lr7e6_bs1/checkpoint-2130 \
+# ./Qwen_eval.sh --hoststr "$hoststr" --model_name_or_path /opt/nas/p/zhubin/saved_checkpoint/0327_Qwen2.5-14B-InstructG_neft_accdb_markdown_wd_ep3_lr7e6_bs1/checkpoint-2130 \
 # 	--eval_dataset callsum_v7_test_markdown --output_name "callsum_v7_test_markdown" --finetuning_type full
 
 # ./Qwen_eval.sh --hoststr "$hoststr" --model_name_or_path /opt/nas/p/zhubin/saved_checkpoint/0328_Qwen2.5-14B-Instruct_neft_accdb_markdown_wd_ep3_lr7e6_bs1/checkpoint-1426 \
@@ -231,3 +231,30 @@ export HF_HOME=/opt/local/data/
 
 # ./Qwen_eval.sh --hoststr "$hoststr" --model_name_or_path /opt/nas/p/zhubin/saved_checkpoint/0509_Qwen2.5-14B-Instruct_neft5_afcdbzd_v9_v7_markdown_wd_ep2_lr1e5_bs1/checkpoint-2708 \
 # 	--eval_dataset diting_v9.2_markdown --output_name "business_test_v2" --finetuning_type full
+
+
+./Qwen_eval.sh  --hoststr "$hoststr" --model_name_or_path /opt/nas/n/zb/DATA/models/Qwen/Qwen3-4B \
+	--adapter_name_or_path /opt/nas/n/zb/saved_checkpoint/_Qwen3-4B_afcdbzd_v9_v8_markdown_wd_ep2_lr2e4_bs4/checkpoint-339/ \
+	--template qwen3 \
+	--eval_dataset callsum_v8_test_markdown --output_name callsum_v8 --finetuning_type lora
+
+./Qwen_eval.sh  --hoststr "$hoststr" --model_name_or_path /opt/nas/n/zb/DATA/models/Qwen/Qwen3-4B \
+	--adapter_name_or_path /opt/nas/n/zb/saved_checkpoint/_Qwen3-4B_afcdbzd_v9_v8_markdown_wd_ep2_lr2e4_bs4/checkpoint-339/ \
+	--template qwen3 \
+	--eval_dataset callsum_v9_test_markdown --output_name callsum_v9 --finetuning_type lora
+
+
+./Qwen_eval.sh  --hoststr "$hoststr" --model_name_or_path /opt/nas/n/zb/DATA/models/Qwen/Qwen3-4B \
+	--adapter_name_or_path /opt/nas/n/zb/saved_checkpoint/_Qwen3-4B_afcdbzd_v9_v8_markdown_wd_ep2_lr2e4_bs4/checkpoint-676 \
+	--template qwen3 \
+	--eval_dataset callsum_v8_test_markdown --output_name callsum_v8 --finetuning_type lora
+
+./Qwen_eval.sh  --hoststr "$hoststr" --model_name_or_path /opt/nas/n/zb/DATA/models/Qwen/Qwen3-4B \
+	--adapter_name_or_path /opt/nas/n/zb/saved_checkpoint/_Qwen3-4B_afcdbzd_v9_v8_markdown_wd_ep2_lr2e4_bs4/checkpoint-676 \
+	--template qwen3 \
+	--eval_dataset callsum_v9_test_markdown --output_name callsum_v9 --finetuning_type lora
+
+
+
+
+
