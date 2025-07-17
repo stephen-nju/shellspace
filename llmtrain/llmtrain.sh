@@ -20,8 +20,8 @@ export NCCL_NET_GDR_LEVEL=2
 export NCCL_IB_HCA=$NCCL_IB_HCA #腾讯云H800服务器，可以将此参数注释掉
 export NCCL_ALGO=Ring
 
-export DS_ENV_FILE=/opt/nas/n/zb/code/Llmtrain/.deepspeed_env
-export PROJECT_PATH=/opt/nas/n/zb/code/Llmtrain/
+export DS_ENV_FILE=/opt/nas/p/zb/code/Llmtrain/.deepspeed_env
+export PROJECT_PATH=/opt/nas/p/zb/code/Llmtrain/
 export HF_HOME=/opt/local/data/
 
 cd ${PROJECT_PATH}
@@ -43,7 +43,7 @@ export finetuning_type=full
 export batch_size=4
 export weight_decay=0
 export max_grad_norm=1
-export hostfile=/opt/nas/n/zb/code/Llmtrain/config/hostfile
+export hostfile=/opt/nas/p/zb/code/Llmtrain/config/hostfile
 export include
 export gradient_accumulation_steps=1
 export model_name_or_path
@@ -296,8 +296,8 @@ if [[ $enable_thinking = true ]]; then
 	echo ">>>> thinking is enabled, pay attention to your dataset"
 fi
 
-export OUTPUT_DIR=/opt/nas/n/zb/saved_checkpoint/$name
-export WANDB_DIR=$OUTPUT_DIR/logs
+export OUTPUT_DIR=/opt/nas/p/zb/saved_checkpoint/$name
+export WANDB_DIR=$OUTPUT_DIR/loggs
 
 mkdir -p ${OUTPUT_DIR}
 mkdir -p ${WANDB_DIR}
