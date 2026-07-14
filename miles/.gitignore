@@ -1,2 +1,23 @@
 # Local superpowers docs (design specs, plans) — kept locally but not tracked
 docs/superpowers/
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Editor / IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Python (in case scripts or wrappers are added at this level)
+__pycache__/
+*.pyc
+*.pyo
+
+# Logs and local env
+*.log
+.env
+.env.local
