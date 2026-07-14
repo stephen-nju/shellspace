@@ -1,0 +1,10 @@
+#!/bin/bash
+#
+# 颜色常量
+#
+
+COLOR_RED='\033[0;31m'
+COLOR_GREEN='\033[0;32m'
+COLOR_YELLOW='\033[1;33m'
+COLOR_BLUE='\033[0;34m'
+COLOR_NC='\033[0m'

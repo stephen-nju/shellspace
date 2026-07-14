@@ -477,14 +477,23 @@ echo "training scripts date ${DATE}"
 # 	--neftune_noise_alpha 5 --eval_dataset callsum_v9_test_markdown --eval_strategy steps --eval_steps 500 --warmup_ratio 0.03 \
 # 	--enable_liger_kernel true --flash_attn fa2
 
-./llmtrain.sh --do_train --do_eval --hostfile /opt/nas/p/zhubin/code/Llmtrain/config/hostfile \
-	--stage sft --finetuning_type lora --lora_rank 32 --lora_alpha 1 --lora_target all --loraplus_lr_ratio 16 \
-	--name="${DATE}_Qwen3-4B-pruning_afcdbzd_v9_v8_markdown_wd_ep2_lr2e4_bs4" \
-	--model_name_or_path /opt/nas/n/xwgeng/Working/LLaMA-Factory/ckpts/depth_pruning_sft --template qwen3 \
-	--dataset alpace_gpt4_zh_retain,firefly_summary_part,callsum_v9.1_train_markdown,diting_v9.2_markdown,beta_noise_v9.1_markdown,zdjt_v9_markdown,diting_fraud_v9_markdown,callsum_v8.1_train_markdown,diting_v8.2_markdown \
-	--batch_size 4 --gradient_accumulation_steps 16 --cutoff_len 4096 --epochs 2 --lr 2e-4 --weight_decay 0.1 \
-	--save_strategy epoch --save_total_limit 100 --seed 42 \
-	--eval_dataset callsum_v9_test_markdown --eval_strategy steps --eval_steps 500 --warmup_ratio 0.03 \
-	--enable_liger_kernel true --flash_attn fa2
+# ./llmtrain.sh --do_train --do_eval --hostfile /opt/nas/p/zhubin/code/Llmtrain/config/hostfile \
+# 	--stage sft --finetuning_type lora --lora_rank 32 --lora_alpha 1 --lora_target all --loraplus_lr_ratio 16 \
+# 	--name="${DATE}_Qwen3-4B-pruning_afcdbzd_v9_v8_markdown_wd_ep2_lr2e4_bs4" \
+# 	--model_name_or_path /opt/nas/n/xwgeng/Working/LLaMA-Factory/ckpts/depth_pruning_sft --template qwen3 \
+# 	--dataset alpace_gpt4_zh_retain,firefly_summary_part,callsum_v9.1_train_markdown,diting_v9.2_markdown,beta_noise_v9.1_markdown,zdjt_v9_markdown,diting_fraud_v9_markdown,callsum_v8.1_train_markdown,diting_v8.2_markdown \
+# 	--batch_size 4 --gradient_accumulation_steps 16 --cutoff_len 4096 --epochs 2 --lr 2e-4 --weight_decay 0.1 \
+# 	--save_strategy epoch --save_total_limit 100 --seed 42 \
+# 	--eval_dataset callsum_v9_test_markdown --eval_strategy steps --eval_steps 500 --warmup_ratio 0.03 \
+# 	--enable_liger_kernel true --flash_attn fa2
 
-/opt/nas/p/zhubin/run_GPU/run_full_gpu.sh
+./llmtrain.sh --do_train --do_eval --hostfile /opt/nas/p/mmu/zb/code/Llmtrain/config/hostfile \
+	--stage sft --finetuning_type lora --lora_rank 32 --lora_alpha 1 --lora_target all --loraplus_lr_ratio 16 \
+	--name="${DATE}_Qwen2.5-7B-Instrcut_s_wd_ep2_lr2e4_bs4" \
+	--template qwen_honor \
+	--model_name_or_path /opt/nas/p/mmu/nanjing/models/Qwen_models/Qwen2.5-7B-Instruct/ \
+	--dataset train_sharegpt \
+	--batch_size 4 --gradient_accumulation_steps 16 --cutoff_len 2048 --epochs 2 --lr 2e-4 --weight_decay 0.1 \
+	--save_strategy epoch --save_total_limit 100 --seed 42 \
+	--eval_dataset train_sharegpt --eval_strategy steps --eval_steps 500 --warmup_ratio 0.03 \
+	--enable_liger_kernel true --flash_attn fa2

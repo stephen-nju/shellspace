@@ -1,14 +1,22 @@
-export dataset_dir=/opt/nas/p/zhubin/DATA/train_data/openai
-# 构建dataset的名称
-export union_conversations_v5_norm_markdown=$dataset_dir/union_conversations_v5/union_conversations_train_norm_v5_openai_markdownv1.jsonl
-export union_conversations_v4_ll_markdown=$dataset_dir/union_conversations_v5/union_conversations_train_long_v4_less4096_openai_markdownv1.jsonl
-export diting_v1_markdown=$dataset_dir/diting_iio_llf_v1_train_openai_markdownv1.jsonl
-export diting_v1_dev=$dataset_dir/diting_iio_llf_v1_dev_openai_markdownv1.jsonl
-export dialogsum_chinese_markdown=$dataset_dir/dialogsum_conversation_train_iio_llf_v1_markdownv1.jsonl
-export samsum_chinese_markdown=$dataset_dir/samsum_conversation_train_iio_llf_v1_markdownv1.jsonl
-export liantong_conversations_v1_markdown=$dataset_dir/liantong_conversation_train_norm_v1_openai_markdownv1.jsonl
-export union_conversations_v5_dev_markdown=$dataset_dir/union_conversations_v5/union_conversation_v5.4_iio_llf_dev_openai_markdownv1.jsonl
-export alpaca_gpt4_zh_retain=$dataset_dir/alpaca_gpt4_zh_retain.jsonl
+vc -node list | awk '{print $0,"slots=8"}' >/opt/nas/p/mmu/zb/code/shellspace/cache/ms_hostfile
+vc -proxy open
+
+export DATE=$(date "+%m%d")
+echo "training scripts date ${DATE}"
+export HF_HOME=/opt/local/data/
+export hostfile=/opt/nas/p/mmu/zb/code/shellspace/cache/ms_hostfile
+
+# export dataset_dir=/opt/nas/p/zb/DATA/train_data/openai
+# # 构建dataset的名称
+# export union_conversations_v5_norm_markdown=$dataset_dir/union_conversations_v5/union_conversations_train_norm_v5_openai_markdownv1.jsonl
+# export union_conversations_v4_ll_markdown=$dataset_dir/union_conversations_v5/union_conversations_train_long_v4_less4096_openai_markdownv1.jsonl
+# export diting_v1_markdown=$dataset_dir/diting_iio_llf_v1_train_openai_markdownv1.jsonl
+# export diting_v1_dev=$dataset_dir/diting_iio_llf_v1_dev_openai_markdownv1.jsonl
+# export dialogsum_chinese_markdown=$dataset_dir/dialogsum_conversation_train_iio_llf_v1_markdownv1.jsonl
+# export samsum_chinese_markdown=$dataset_dir/samsum_conversation_train_iio_llf_v1_markdownv1.jsonl
+# export liantong_conversations_v1_markdown=$dataset_dir/liantong_conversation_train_norm_v1_openai_markdownv1.jsonl
+# export union_conversations_v5_dev_markdown=$dataset_dir/union_conversations_v5/union_conversation_v5.4_iio_llf_dev_openai_markdownv1.jsonl
+# export alpaca_gpt4_zh_retain=$dataset_dir/alpaca_gpt4_zh_retain.jsonl
 
 # ./mstrain.sh --do_train --do_eval --stage sft --finetuning_type lora --template qwen2_5 --lora_rank 32 --lora_target all-linear --loraplus_lr_ratio 16 \
 # 	--model_name_or_path /opt/nas/p/models/Qwen_models/Qwen2.5-1.5B/ \
@@ -40,14 +48,12 @@ export alpaca_gpt4_zh_retain=$dataset_dir/alpaca_gpt4_zh_retain.jsonl
 # 	--gradient_accumulation_steps=4 --max_length=4096 --epochs=3 --batch_size 4 --lr=2e-4 --save_strategy=epoch --warmup_ratio 0.1 --save_total_limit=10 \
 # 	--eval_dataset $union_conversations_v5_dev_markdown --eval_strategy steps --eval_steps 500 \
 
-
 # ./mstrain.sh --do_train --do_eval --stage sft --finetuning_type full --template qwen2_5 \
 # 	--model_name_or_path /opt/nas/p/models/Qwen_models/Qwen2.5-1.5B/ \
 # 	--name 0207_ms_Qwen2.5-1.5B_lud_full_ep3_lr2e5_bs4 \
 # 	--dataset $union_conversations_v5_norm_markdown,$union_conversations_v4_ll_markdown,$diting_v1_markdown,$liantong_conversations_v1_markdown \
 # 	--gradient_accumulation_steps=4 --max_length=4096 --epochs=3 --batch_size 4 --lr=2e-5 --save_strategy=epoch --warmup_ratio 0.1 --save_total_limit=10 \
 # 	--eval_dataset $union_conversations_v5_dev_markdown --eval_strategy steps --eval_steps 500 \
-
 
 # ./mstrain.sh --do_train --do_eval --stage sft --finetuning_type lora --template default --lora_rank 32 --lora_target all-linear --loraplus_lr_ratio 16 \
 # 	--model_name_or_path /opt/nas/p/models/Qwen_models/Qwen2.5-1.5B/ \
@@ -56,7 +62,6 @@ export alpaca_gpt4_zh_retain=$dataset_dir/alpaca_gpt4_zh_retain.jsonl
 # 	--gradient_accumulation_steps=4 --max_length=4096 --epochs=3 --batch_size 4 --lr=2e-4 --save_strategy=epoch --warmup_ratio 0.1 --save_total_limit=10 \
 # 	--eval_dataset $union_conversations_v5_dev_markdown --eval_strategy steps --eval_steps 500 \
 
-
 # ./mstrain.sh --do_train --do_eval --stage sft --finetuning_type lora --template qwen2_5 --lora_rank 32 --lora_target all-linear,all-embedding,lm_head --loraplus_lr_ratio 16 \
 # 	--model_name_or_path /opt/nas/p/models/Qwen_models/Qwen2.5-1.5B/ \
 # 	--name 0207_ms_Qwen2.5-1.5B_lud_template_qwen_lm_head_lorap16_ep3_lr2e4_bs4 \
@@ -64,15 +69,12 @@ export alpaca_gpt4_zh_retain=$dataset_dir/alpaca_gpt4_zh_retain.jsonl
 # 	--gradient_accumulation_steps=4 --max_length=4096 --epochs=3 --batch_size 4 --lr=2e-4 --save_strategy=epoch --warmup_ratio 0.1 --save_total_limit=10 \
 # 	--eval_dataset $union_conversations_v5_dev_markdown --eval_strategy steps --eval_steps 500 \
 
-
 #  ./mstrain.sh --do_train --do_eval --stage sft --finetuning_type lora --template qwen2_5 --lora_rank 32 --lora_target all-linear --loraplus_lr_ratio 16 \
 # 	--model_name_or_path /opt/nas/p/models/Qwen_models/Qwen2.5-1.5B/ \
 # 	--name 0207_ms_Qwen2.5-1.5B_alpaca_lorap16_ep3_lr2e4_bs4 \
 # 	--dataset $alpaca_gpt4_zh_retain \
 # 	--gradient_accumulation_steps=4 --max_length=4096 --epochs=3 --batch_size 4 --lr=2e-4 --save_strategy=epoch --warmup_ratio 0.1 --save_total_limit=10 \
 # 	--eval_dataset $union_conversations_v5_dev_markdown --eval_strategy steps --eval_steps 500 \
-
-
 
 # ./mstrain.sh --do_train --do_eval --stage sft --finetuning_type full --template qwen2_5 \
 # 	--model_name_or_path /opt/nas/p/models/Qwen_models/Qwen2.5-1.5B/ \
@@ -117,7 +119,6 @@ export alpaca_gpt4_zh_retain=$dataset_dir/alpaca_gpt4_zh_retain.jsonl
 # 	--gradient_accumulation_steps=1 --max_length=4096 --epochs=5 --batch_size 4 --lr=5e-4 --save_strategy=epoch --warmup_ratio 0.1 --save_total_limit=10 \
 # 	--eval_dataset $union_conversations_v5_dev_markdown --eval_strategy steps --eval_steps 500 \
 
-
 # ./mstrain.sh --do_train --do_eval --stage sft --finetuning_type lora --template default --lora_rank 32 --lora_target all-linear --loraplus_lr_ratio 16 \
 # 	--model_name_or_path /opt/nas/p/models/Qwen_models/Qwen2.5-1.5B/ \
 # 	--name 0208_ms_Qwen2.5-1.5B_lud_template_default_lorap16_ep5_lr5e4_bs4 \
@@ -132,9 +133,38 @@ export alpaca_gpt4_zh_retain=$dataset_dir/alpaca_gpt4_zh_retain.jsonl
 # 	--gradient_accumulation_steps=4 --max_length=4096 --epochs=5 --batch_size 4 --lr=5e-4 --save_strategy=epoch --warmup_ratio 0.1 --save_total_limit=10 \
 # 	--eval_dataset $union_conversations_v5_dev_markdown --eval_strategy steps --eval_steps 500 \
 
-./mstrain.sh --do_train --do_eval --stage sft --finetuning_type lora --template qwen2_5 --lora_rank 32 --lora_target all-linear --loraplus_lr_ratio 16 \
-	--model_name_or_path /opt/nas/p/models/Qwen_models/Qwen2-1.5B \
-	--name TEST_MS \
-	--dataset $union_conversations_v5_norm_markdown,$union_conversations_v4_ll_markdown,$diting_v1_markdown,$liantong_conversations_v1_markdown \
-	--gradient_accumulation_steps=4 --max_length=4096 --epochs=5 --batch_size 4 --lr=1e-4 --save_strategy=epoch --warmup_ratio 0.1 --save_total_limit=10 \
-	--eval_dataset $union_conversations_v5_dev_markdown --eval_strategy steps --eval_steps 500 \
+# ./mstrain.sh --do_train --do_eval --stage sft --finetuning_type lora --template qwen2_5 --lora_rank 32 --lora_target all-linear --loraplus_lr_ratio 16 \
+# 	--model_name_or_path /opt/nas/p/models/Qwen_models/Qwen2-1.5B \
+# 	--name TEST_MS \
+# 	--dataset $union_conversations_v5_norm_markdown \
+# 	--gradient_accumulation_steps=4 --max_length=4096 --epochs=5 --batch_size 4 --lr=1e-4 --save_strategy=epoch --warmup_ratio 0.1 --save_total_limit=10 \
+# 	--eval_dataset $union_conversations_v5_dev_markdown --eval_strategy steps --eval_steps 500 \
+
+# ./mstrain.sh --do_train --do_eval --stage sft --finetuning_type full --hostfile ${hostfile} --template qwen2_5 \
+# 	--model_name_or_path /opt/nas/p/models/Qwen_models/Qwen2-1.5B \
+# 	--name TEST_MS \
+# 	--dataset $union_conversations_v5_norm_markdown \
+# 	--gradient_accumulation_steps=4 --max_length=4096 --epochs=5 --batch_size 4 --lr=1e-4 --save_strategy=epoch --warmup_ratio 0.1 --save_total_limit=10 \
+# 	--eval_dataset $union_conversations_v5_dev_markdown --eval_strategy steps --eval_steps 500
+
+# 多模模型训练
+# export schedule_train_ds=/opt/nas/n/mmu/zhubin/DATA/YOYO_memory/Schedule_train_datasets/20260226_v1/train_datasets_0226.json
+# export schdule_dev_ds =/opt/nas/n/mmu/zhubin/DATA/YOYO_memory/Schedule_train_datasets/20260226_v1/dev_datasets_0226.json
+
+# ./mstrain.sh --do_train --stage sft --finetuning_type lora --lora_rank 32 --lora_target all-linear --loraplus_lr_ratio 16 \
+# 	--hostfile ${hostfile} --include=mmu-mmu-l20-ps-3-0:0,1,2,3,4,5 \
+# 	--model_name_or_path /opt/tools/resource/easy_model/model/Qwen3-VL-4B-Instruct \
+# 	--name "${DATE}_Qwen3-VL-4B-Instruct_schedule" \
+# 	--dataset $schedule_ds \
+# 	--gradient_accumulation_steps=4 --max_length=4096 --epochs=5 --batch_size 4 --lr=1e-4 --save_strategy=epoch --warmup_ratio 0.1 --save_total_limit=10
+
+# 纯文的模型训练，看下文本模型的效果
+export schedule_train_ds=/opt/nas/n/mmu/zhubin/DATA/YOYO_memory/Schedule_train_datasets/20260226_v1/train_datasets_0226.json
+export schdule_dev_ds =/opt/nas/n/mmu/zhubin/DATA/YOYO_memory/Schedule_train_datasets/20260226_v1/dev_datasets_0226.json
+
+./mstrain.sh --do_train --stage sft --finetuning_type lora --lora_rank 16 --lora_target all-linear --loraplus_lr_ratio 16 \
+	--hostfile ${hostfile} --include=mmu-mmu-l20-ps-3-0:0,1,2,3,4,5 \
+	--model_name_or_path /opt/tools/resource/easy_model/model/Qwen3-8B/ \
+	--name "${DATE}_Qwen3-8B_r16__schedule" \
+	--dataset $schedule_ds \
+	--gradient_accumulation_steps=4 --max_length=4096 --epochs=5 --batch_size 4 --lr=1e-4 --save_strategy=epoch --warmup_ratio 0.1 --save_total_limit=10

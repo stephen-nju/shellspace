@@ -1,0 +1,12 @@
+[submodule "miles/repo/miles"]
+	path = miles/repo/miles
+	url = https://github.com/radixark/miles.git
+[submodule "miles/repo/Megatron-LM"]
+	path = miles/repo/Megatron-LM
+	url = https://github.com/radixark/Megatron-LM.git
+[submodule "miles/repo/sglang"]
+	path = miles/repo/sglang
+	url = https://github.com/sgl-project/sglang.git
+[submodule "miles/repo/sgl-router-for-miles"]
+	path = miles/repo/sgl-router-for-miles
+	url = https://github.com/radixark/sgl-router-for-miles.git

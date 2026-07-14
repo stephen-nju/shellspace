@@ -51,6 +51,8 @@ echo ""
 # export ROLLOUT_BATCH_SIZE=4
 # export N_SAMPLES_PER_PROMPT=4
 export USE_WANDB=true
+export WANDB_GROUP="miles-rl-dev"
+export DISABLE_WANDB_RANDOM_SUFFIX=true
 # ./rltrain.sh \
 # 	--use_polar \
 # 	--name="${DATE}_Qwen3.5-4B-slime_test" \
@@ -80,16 +82,16 @@ export MASTER_ADDR=127.0.0.1
 #   NCCL_IB_HCA   IB HCA 名 (如 mlx5_0)
 #   NCCL_DEBUG=INFO  打开 NCCL 调试日志
 # ──────────────────────────────────────────────────────────────
+export EVAL_INTERVAL=1
 ./rltrain.sh \
 	--train-mode rl \
 	--name="${DATE}_Qwen3-4B-Instruction-miles_rl_test" \
 	--dataset /opt/nas/n/mmu/zhubin/DATA/huggingface/dapo-math-17k-processed/dapo_math_17k_cleaned.jsonl \
 	--hf_checkpoint /opt/nas/n/mmu/zhubin/saved_checkpoint/0627_160016_Qwen3-4B-Instruction-miles_test_hf \
 	--ref_load /opt/nas/n/mmu/zhubin/saved_checkpoint/0627_160016_Qwen3-4B-Instruction-miles_test_torch_distr \
-	--eval_prompt_data /opt/nas/n/mmu/zhubin/DATA/huggingface/aime-2024/aime-2024.jsonl \
+	--eval_prompt_data aime /opt/nas/n/mmu/zhubin/DATA/huggingface/aime-2024/aime-2024.jsonl \
 	--log_file "${LOG_FILE}" \
-	--num-rollout 3000 \
-	--override_opt_param_scheduler true \
+	--num-rollout 400 \
 	--log_level DEBUG
 
 # --ref_load /opt/nas/n/mmu/zhubin/DATA/huggingface/Qwen3-4B-Instruct-2507_torch_dist/ \

@@ -214,6 +214,7 @@ print_config() {
 	echo -e "${COLOR_BLUE}----------------------------------------------${COLOR_NC}"
 	printf " %-25s %s\n" "Wandb:" "${USE_WANDB}"
 	[ "${USE_WANDB}" = "true" ] && printf " %-25s %s\n" "Wandb project:" "${WANDB_PROJECT}"
+	[ "${USE_WANDB:-false}" = "true" ] && [ -n "${WANDB_GROUP:-}" ] && printf " %-25s %s\n" "Wandb group:" "${WANDB_GROUP}"
 	echo -e "${COLOR_BLUE}==============================================${COLOR_NC}"
 	echo ""
 }

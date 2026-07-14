@@ -39,7 +39,7 @@ apply_config_defaults() {
 
 	# ── Wandb ───────────────────────────────────────────────
 	WANDB_PROJECT="${WANDB_PROJECT:-RLtrain}"
-	USE_WANDB="${USE_WANDB:-false}"
+	USE_WANDB="${USE_WANDB:-true}"
 	WANDB_MODE="${WANDB_MODE:-offline}"
 
 	# ── 日志 ────────────────────────────────────────────────
@@ -55,13 +55,4 @@ apply_config_defaults() {
 	PROMPT_DATA="${PROMPT_DATA:-${DATASET}}"
 	SAVE_DIR="${SAVE_DIR:-${SAVE_DIR_BASE}${NAME}/checkpoints}"
 	WANDB_DIR="${WANDB_DIR:-${SAVE_DIR}/logs}"
-
-	# ── LOAD_DIR 推断 ──────────────────────────────────────
-	if [ -z "${LOAD_DIR:-}" ]; then
-		if [ -f "${SAVE_DIR}/latest_checkpointed_iteration.txt" ]; then
-			LOAD_DIR="${SAVE_DIR}"
-		elif [ -n "${REF_LOAD:-}" ] && [ -f "${REF_LOAD}/latest_checkpointed_iteration.txt" ]; then
-			LOAD_DIR="${REF_LOAD}"
-		fi
-	fi
 }

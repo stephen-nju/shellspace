@@ -1,7 +1,6 @@
-exec > /opt/nas/p/zhubin/easyjobLog/mseval.log
-export dataset_dir=/opt/nas/p/zhubin/DATA/train_data/openai
-export union_conversations_v5_dev_markdown=$dataset_dir/union_conversations_v5/union_conversation_v5.4_iio_llf_dev_openai_markdownv1.jsonl
-export alpaca_gpt4_zh_retain_eval=$dataset_dir/alpaca_gpt4_zh_retain_eval.jsonl
+# export dataset_dir=/opt/nas/p/zhubin/DATA/train_data/openai
+# export union_conversations_v5_dev_markdown=$dataset_dir/union_conversations_v5/union_conversation_v5.4_iio_llf_dev_openai_markdownv1.jsonl
+# export alpaca_gpt4_zh_retain_eval=$dataset_dir/alpaca_gpt4_zh_retain_eval.jsonl
 
 # ./mseval.sh --eval_dataset $union_conversations_v5_dev_markdown \
 # --adapters=/opt/nas/p/zhubin/saved_checkpoint/swifttest/v3-20250206-103024/checkpoint-1586
@@ -139,4 +138,18 @@ export alpaca_gpt4_zh_retain_eval=$dataset_dir/alpaca_gpt4_zh_retain_eval.jsonl
 # ./mseval.sh --finetuning_type lora --eval_dataset $union_conversations_v5_dev_markdown \
 # 	--adapters=/opt/nas/p/zhubin/saved_checkpoint/0210_ms_Qwen2-1.5B_lud_template_qwen_lorap16_ep5_lr1e4_bs4/v0-20250210-151559/checkpoint-990
 
+# export schedule_dev=/opt/nas/n/mmu/zhubin/DATA/YOYO_memory/Schedule_train_datasets/20260317_v3/dev_datasets_0317.json
+# ./mseval.sh --finetuning_type lora --eval_dataset $schedule_dev --adapters=/opt/nas/n/mmu/zhubin/saved_checkpoint/20260318-154528_Qwen3-VL-8B-Instruct_schedule_r16_ep2_lr1e4_bs4/v0-20260318-154550/checkpoint-939
 
+# ./mseval.sh --finetuning_type lora --eval_dataset $schedule_dev --adapters=/opt/nas/n/mmu/zhubin/saved_checkpoint/20260318-154528_Qwen3-VL-8B-Instruct_schedule_r16_ep2_lr1e4_bs4/v0-20260318-154550/checkpoint-1878
+
+# ./mseval.sh --finetuning_type lora --eval_dataset $schedule_dev --adapters=/opt/nas/n/mmu/zhubin/saved_checkpoint/20260318-163118_Qwen3-VL-4B-Instruct_schedule_r16_ep2_lr1e4_bs4/v0-20260318-163203/checkpoint-939
+# ./mseval.sh --finetuning_type lora --eval_dataset $schedule_dev --adapters=/opt/nas/n/mmu/zhubin/saved_checkpoint/20260318-163118_Qwen3-VL-4B-Instruct_schedule_r16_ep2_lr1e4_bs4/v0-20260318-163203/checkpoint-1878
+# ./mseval.sh --finetuning_type lora --eval_dataset $schedule_dev --adapters=/opt/nas/n/mmu/zhubin/saved_checkpoint/20260318-163118_Qwen3-VL-4B-Instruct_schedule_r16_ep2_lr1e4_bs4/v0-20260318-163203/checkpoint-2817
+# ./mseval.sh --finetuning_type lora --eval_dataset $schedule_dev --adapters=/opt/nas/n/mmu/zhubin/saved_checkpoint/20260318-163118_Qwen3-VL-4B-Instruct_schedule_r16_ep2_lr1e4_bs4/v0-20260318-163203/checkpoint-3756
+
+export schedule_dev=/opt/nas/n/mmu/zhubin/DATA/YOYO_memory/Schedule_train_datasets/20260317_v3/text_dev_datasets_0317.json
+./mseval.sh --finetuning_type lora --eval_dataset $schedule_dev --adapters=/opt/nas/n/mmu/zhubin/saved_checkpoint/20260324-201228_Qwen3-4B_Instruct_schedule_r16_ep2_lr1e4_bs4/v0-20260324-201251/checkpoint-609
+
+export schedule_dev=/opt/nas/n/mmu/zhubin/DATA/YOYO_memory/Schedule_train_datasets/20260317_v3/text_dev_datasets_0317.json
+./mseval.sh --finetuning_type lora --eval_dataset $schedule_dev --adapters=/opt/nas/n/mmu/zhubin/saved_checkpoint/20260324-201228_Qwen3-4B_Instruct_schedule_r16_ep2_lr1e4_bs4/v0-20260324-201251/checkpoint-1218

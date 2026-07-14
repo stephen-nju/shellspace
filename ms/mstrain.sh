@@ -12,22 +12,28 @@ Usage: train magiclm nano
 EOF
 }
 
-export NCCL_SOCKET_IFNAME=eth0
-export NCCL_IB_DISABLE=0
+vc -node list | awk '{print $0,"slots=8"}' >/opt/nas/p/mmu/zb/code/shellspace/cache/ms_hostfile
+vc -proxy open
+
+export NCCL_SOCKET_IFNAME=$NCCL_SOCKET_IFNAME
+export NCCL_IB_DISABLE=$NCCL_IB_DISABLE
 export NCCL_IB_TIMEOUT=22
-export NCCL_IB_GID_INDEX=3
+export NCCL_IB_GID_INDEX=$NCCL_IB_GID_INDEX
 export NCCL_IB_TC=160
 export NCCL_NET_GDR_LEVEL=2
-export NCCL_IB_HCA=mlx5_bond_0,mlx5_bond_1,mlx5_bond_2,mlx5_bond_3,mlx5_bond_4,mlx5_bond_5,mlx5_bond_6,mlx5_bond_7
+export NCCL_IB_HCA=$NCCL_IB_HCA #腾讯云H800服务器，可以将此参数注释掉
 export NCCL_ALGO=Ring
-export DS_ENV_FILE=/opt/nas/p/zhubin/code/Llmtrain/.deepspeed_env
-export PROJECT_PATH=/opt/nas/p/zhubin/code/ms-swift
+export DS_ENV_FILE=/opt/nas/p/mmu/zb/code/Llmtrain/.deepspeed_env
+export PROJECT_PATH=/opt/nas/p/mmu/zb/code/ms-swift
 export HF_HOME=/opt/local/data/
+
+export IMAGE_MAX_TOKEN_NUM=1024
+export VIDEO_MAX_TOKEN_NUM=128
+export FPS_MAX_FRAMES=16
 
 cd ${PROJECT_PATH}
 export PYTHONPATH=${PROJECT_PATH}
-export DS_CONFIG_STAGE_3=${PROJECT_PATH}/config/deepspeed/zero_stage3_config.json
-export DS_CONFIG_STAGE_2=${PROJECT_PATH}/config/deepspeed/zero_stage2_config.json
+export zero_stage_config=zero2
 export WANDB_PROJECT="ms-swift"
 
 MASTER_PORT=$(shuf -n 1 -i 10000-65535)
@@ -40,10 +46,10 @@ export epochs=3
 export template
 export finetuning_type=lora
 export batch_size=4
-export hostfile=/opt/nas/p/zhubin/code/Llmtrain/config/hostfile
+export hostfile=/opt/nas/p/mmu/zb/code/shellspace/cache/ms_hostfile
 export include
 export gradient_accumulation_steps=1
-export model_name_or_path=/opt/nas/p/zhubin/DATA/models/honor2_5b_patched_tokenizer/
+export model_name_or_path
 export resize_vocab=false
 export save_strategy=steps
 export save_steps=5000
@@ -73,10 +79,15 @@ export eval_dataset
 export eval_steps
 export eval_strategy=no
 
+## 多模态参数
+export freeze_vit=true
+export freeze_aligner=true
+
 options=$(getopt -l "help,do_train,do_eval,stage:,model_name_or_path:,name:,epochs:,lr:,batch_size:,template:,\
 finetuning_type:,dataset:,max_length:,include:,resize_vocab:,gradient_accumulation_steps:,eval_dataset:,eval_strategy:,eval_steps:,\
-pref_loss:,pref_beta:,simpo_gamma:,ddp_timeout:,neftune_noise_alpha:,hostfile:,\
+pref_loss:,pref_beta:,simpo_gamma:,ddp_timeout:,neftune_noise_alpha:,hostfile:,zero_stage_config:,\
 lora_rank:,lora_alpha:,lora_target:,lora_dropout:,loraplus_lr_ratio:,loraplus_lr_embedding:,\
+freeze_vit:,freeze_aligner:,\
 save_steps:,save_total_limit:,logging_steps:,warmup_ratio:,save_strategy:" -o "e:l:d:b:n:m:g:" -a --n "$0" -- "$@")
 
 eval set -- "$options"
@@ -224,6 +235,18 @@ while true; do
 		shift
 		eval_steps="$1"
 		;;
+	--zero_stage_config)
+		shift
+		zero_stage_config="$1"
+		;;
+	--freeze_vit)
+		shift
+		freeze_vit="$1"
+		;;
+	--freeze_aligner)
+		shift
+		freeze_aligner="$1"
+		;;
 	--)
 		shift
 		break
@@ -240,6 +263,10 @@ else
 	optional_params+=(--neftune_noise_alpha ${neftune_noise_alpha})
 fi
 
+if [[ -n $lora_target ]]; then
+	optional_params+=(--target_modules "${lora_target[@]}")
+fi
+
 if [[ -n $lorap_lr_ratio ]]; then
 	optional_params+=(--lorap_lr_ratio ${lorap_lr_ratio})
 	if [[ -n $lorap_emb_lr ]]; then
@@ -252,70 +279,46 @@ if [[ $do_eval == true ]]; then
 	optional_params+=(--eval_steps ${eval_steps})
 fi
 
-if [[ -n $template ]];then
+if [[ -n $template ]]; then
 	optional_params+=(--template $template)
 fi
 
+deepspeed_params=()
+if [[ -n $include ]]; then
+	deepspeed_params+=(--include $include)
+fi
 
-export OUTPUT_DIR=/opt/nas/p/zhubin/saved_checkpoint/$name
-
+export OUTPUT_DIR=/opt/nas/n/mmu/zhubin/saved_checkpoint/$name
 mkdir -p ${OUTPUT_DIR}
 
-CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7
 echo "working directory=$(pwd)"
 echo "${dataset[@]}"
 
-if [[ $finetuning_type == "lora" ]]; then
-	nproc_per_node=8
-	CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 \
-		NPROC_PER_NODE=$nproc_per_node \
-		swift sft \
-		--do_train ${do_train} \
-		--do_eval ${do_eval} \
-		--model ${model_name_or_path} \
-		--train_type ${finetuning_type} \
-		--dataset "${dataset[@]}" \
-		--num_train_epochs ${epochs} \
-		--per_device_train_batch_size ${batch_size} \
-		--learning_rate ${lr} \
-		--lora_rank ${lora_rank} \
-		--lora_alpha ${lora_alpha} \
-		--target_modules "${lora_target[@]}" \
-		--max_length ${max_length} \
-		--warmup_ratio ${warmup_ratio} \
-		--output_dir ${OUTPUT_DIR} \
-		--gradient_accumulation_steps ${gradient_accumulation_steps} \
-		--save_strategy ${save_strategy} \
-		--save_steps ${save_steps} \
-		--save_total_limit ${save_total_limit} \
-		--logging_steps 5 \
-		--torch_dtype bfloat16 \
-		"${optional_params[@]}" \
-		--system 'You are a helpful assistant.' \
-		--gradient_checkpointing_kwargs '{"use_reentrant": false}'
-elif [[ $finetuning_type == "full" ]]; then
-	nproc_per_node=8
-	CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 \
-		NPROC_PER_NODE=$nproc_per_node \
-		swift sft \
-		--do_train ${do_train} \
-		--do_eval ${do_eval} \
-		--model ${model_name_or_path} \
-		--train_type ${finetuning_type} \
-		--dataset "${dataset[@]}" \
-		--num_train_epochs ${epochs} \
-		--per_device_train_batch_size ${batch_size} \
-		--learning_rate ${lr} \
-		--max_length ${max_length} \
-		--warmup_ratio ${warmup_ratio} \
-		--output_dir ${OUTPUT_DIR} \
-		--gradient_accumulation_steps ${gradient_accumulation_steps} \
-		--save_strategy ${save_strategy} \
-		--save_steps ${save_steps} \
-		--save_total_limit ${save_total_limit} \
-		--logging_steps 5 \
-		--torch_dtype bfloat16 \
-		"${optional_params[@]}" \
-		--system 'You are a helpful assistant.' \
-		--gradient_checkpointing_kwargs '{"use_reentrant": false}'
-fi
+deepspeed --hostfile=$hostfile --master_port=${MASTER_PORT} "${deepspeed_params[@]}" --no_local_rank \
+	swift/cli/sft.py \
+	--deepspeed ${zero_stage_config} \
+	--do_train ${do_train} \
+	--do_eval ${do_eval} \
+	--model ${model_name_or_path} \
+	--tuner_type ${finetuning_type} \
+	--dataset "${dataset[@]}" \
+	--load_from_cache_file true \
+	--num_train_epochs ${epochs} \
+	--per_device_train_batch_size ${batch_size} \
+	--attn_impl flash_attn \
+	--learning_rate ${lr} \
+	--max_length ${max_length} \
+	--warmup_ratio ${warmup_ratio} \
+	--output_dir ${OUTPUT_DIR} \
+	--gradient_accumulation_steps ${gradient_accumulation_steps} \
+	--save_strategy ${save_strategy} \
+	--save_steps ${save_steps} \
+	--save_total_limit ${save_total_limit} \
+	--logging_steps 5 \
+	--torch_dtype bfloat16 \
+	--freeze_vit ${freeze_vit} \
+	--freeze_aligner ${freeze_aligner} \
+	"${optional_params[@]}" \
+	--dataloader_num_workers 4 \
+	--dataset_num_proc 4 \
+	--gradient_checkpointing_kwargs '{"use_reentrant": false}'

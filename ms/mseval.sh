@@ -6,7 +6,11 @@ Usage:eval dataset
 EOF
 }
 
-export PROJECT_PATH=/opt/nas/p/zhubin/code/ms-swift
+export IMAGE_MAX_TOKEN_NUM=1024
+export VIDEO_MAX_TOKEN_NUM=128
+export FPS_MAX_FRAMES=16
+
+export PROJECT_PATH=/opt/nas/p/mmu/zb/code/ms-swift/
 cd ${PROJECT_PATH}
 export eval_dataset
 export adapters
@@ -47,14 +51,13 @@ while true; do
 done
 
 if [[ $finetuning_type == "lora" ]]; then
-
 	NPROC_PER_NODE=8 \
 		CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 \
 		swift infer --adapters ${adapters} \
 		--val_dataset $eval_dataset \
-		--infer_backend pt \
+		--infer_backend transformers \
 		--temperature 0 \
-		--max_batch_size 32 \
+		--max_batch_size 8 \
 		--max_new_tokens 512
 
 elif [[ $finetuning_type == "full" ]]; then
@@ -62,9 +65,9 @@ elif [[ $finetuning_type == "full" ]]; then
 		CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 \
 		swift infer --model ${model} \
 		--val_dataset $eval_dataset \
-		--infer_backend pt \
+		--infer_backend transformers \
 		--temperature 0 \
-		--max_batch_size 32 \
+		--max_batch_size 8 \
 		--max_new_tokens 512
 
 fi
